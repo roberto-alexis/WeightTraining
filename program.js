@@ -29,7 +29,7 @@ export const kg=(value,unit)=>Number(value)*(unit==='lb'?0.45359237:1);
 export const displayWeight=(value,unit)=>Math.round(Number(value)/(unit==='lb'?0.45359237:1)*100)/100;
 export const keyFor=(e,name=e.name)=>`${e.id}:${name}`;
 export function recommendation(e,name,history,unit){
- const entries=history.filter(s=>!s.deload).map(s=>s.exercises.find(x=>x.key===keyFor(e,name))).filter(Boolean).slice(-2);
+ const entries=history.filter(s=>!s.deload).map(s=>s.exercises.find(x=>x.key===keyFor(e,name))).filter(x=>x&&x.sets.length).slice(-2);
  const last=entries.at(-1);if(!last)return {weight:null,text:e.kind==='body'?'Start at the lower end; leave 2 good reps in reserve.':'Choose a load for the low end with 2 good reps in reserve.'};
  const sets=last.sets.filter(s=>s.done);if(!sets.length)return {weight:null,text:'Choose a comfortable starting load.'};
  const base=sets[0].weight;
