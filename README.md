@@ -88,3 +88,11 @@ No server or cloud sync. localStorage stores drafts/history at the current origi
 ## Development
 
 No runtime dependencies. Run `npm run check && npm test`. Serve with `python3 -m http.server 8080` from this directory. `program.js` loads JSON through fetch in browsers and filesystem reads in Node. Include `program.json` in deployment and offline cache. Increase the service-worker cache name when releasing updates.
+
+## Shared illustrations and mobile cards
+
+`images.json` is independent of `program.json`. It maps muscle names to reusable image URLs, accessible descriptions, and CSS atlas position/size. The app chooses the first primary muscle tag from each exercise and falls back to Full body. To use a standalone image, set `size` to `[100,100]` and `position` to `[50,50]`. Local URLs start with `./`; external images must use HTTPS. Remote images need their own offline caching policy.
+
+The original adult cartoon gym portraits were generated with the built-in image-generation tool. Brief: a cohesive 3-column/4-row sheet of diverse handsome adult muscular men in opaque gym shorts, with poses emphasizing chest, back, quads, hamstrings, glutes, shoulders, biceps, triceps, calves, core, rear delts and full body. Pastel pink/lavender/aqua backgrounds, cel shading and no text. They are decorative muscle portraits, not anatomy or exercise-form diagrams. `assets/muscle-atlas.webp` is compressed for phones and shared by all cards.
+
+Cards are collapsible native details controls: tap the exercise heading to open or close; the first exercise opens initially. Open/closed state stays stable while logging within the current app session. The light theme uses pink/violet/aqua accents and a thin rainbow header.

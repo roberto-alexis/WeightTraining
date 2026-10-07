@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "description": "Original stylized adult gym illustrations. Decorative muscle-group portraits, not exercise demonstrations or anatomical diagrams. Shared atlas keeps mobile downloads small.",
+  "muscles": {
+    "Chest": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing chest",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        0,
+        0.0
+      ]
+    },
+    "Back": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing back",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        50,
+        0.0
+      ]
+    },
+    "Quads": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing quads",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        100,
+        0.0
+      ]
+    },
+    "Hamstrings": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing hamstrings",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        0,
+        33.333333
+      ]
+    },
+    "Glutes": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing glutes",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        50,
+        33.333333
+      ]
+    },
+    "Side delts": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing side delts",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        100,
+        33.333333
+      ]
+    },
+    "Biceps": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing biceps",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        0,
+        66.666667
+      ]
+    },
+    "Triceps": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing triceps",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        50,
+        66.666667
+      ]
+    },
+    "Calves": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing calves",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        100,
+        66.666667
+      ]
+    },
+    "Core": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing core",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        0,
+        100.0
+      ]
+    },
+    "Rear delts": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing rear delts",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        50,
+        100.0
+      ]
+    },
+    "Full body": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing full body",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        100,
+        100.0
+      ]
+    },
+    "Front delts": {
+      "url": "./assets/muscle-atlas.webp",
+      "alt": "Stylized adult gym guy showing side delts",
+      "size": [
+        300,
+        400
+      ],
+      "position": [
+        100,
+        33.333333
+      ]
+    }
+  }
+}
