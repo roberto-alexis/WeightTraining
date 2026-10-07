@@ -1,60 +1,90 @@
-# Three · Weight Training
+# Three · Hypertrophy Training
 
-An installable, offline-capable single-page training journal. Three full-body sessions per week, approximately 70–85 minutes each, with core in every session. No runtime dependencies, account, analytics or server required.
+Installable, offline-capable training journal: three full-body sessions, 75–90 minutes, core every day, and separately logged warm-up sets.
 
-## Use on Android
+## Android installation
 
-1. Enable **Settings → Pages → Build and deployment → Source → GitHub Actions** in this repository.
-2. Run **Actions → Test and deploy training app → Run workflow** if the initial push ran before Pages was enabled.
-3. Open https://roberto-alexis.github.io/WeightTraining/ in Chrome on Android.
-4. Tap **Install app**, or Chrome's menu → **Add to home screen → Install**.
-5. Reopen once online to confirm “Offline cache ready”, then it can run offline.
+Open https://roberto-alexis.github.io/WeightTraining/ in Chrome → Install app (or menu → Add to home screen → Install). Reopen online once to cache the app. Export journal backups regularly; logs are device-local.
 
-## Program
+## Configure the plan
 
-Train A/B/C on nonconsecutive days (e.g. Monday/Wednesday/Friday). All sets below are work sets. Warm up for 8–10 minutes plus progressive ramp sets as needed. Leave about 2 repetitions in reserve (RIR). Session estimates include warm-up, core, rest and equipment transitions; gym congestion may add time.
+**Edit `program.json`**, then commit to `main`. GitHub Actions checks and deploys changes automatically. No app-code changes are needed to add exercises, change set counts, reorder exercises/sessions, or adjust rep ranges/rest.
 
-| Day | Exercise | Sets × reps | Rest |
+- `sessions`: three session objects, rendered in array order. Each has `id`, `name`, `time`, and `exercises`.
+- Exercise `id`: unique across the entire plan. Keep IDs stable to retain progression history; change the ID when changing the movement fundamentally.
+- `name`, `cue`, `alt`: primary movement, technique note, and alternative names.
+- `sets`, `min`, `max`, `rest`: work-set count, rep range, rest in seconds. Warm-ups are independent.
+- `kind`: `load` or `body`; bodyweight work does not require a load.
+- `targetRir`: minimum RIR required for progression. Default compounds 2; isolation 1, with 1–2 RIR encouraged.
+- `increment`: unit-specific proposed increments, e.g. `{ "lb": 2.5, "kg": 1 }`. Use proportionate equipment increments, usually 2–5%.
+- `group`: display label. Matching `PAIR` labels designate accessory pairings; these do not automate rest or exercise switching.
+- `muscles`: primary muscle tags for the live weekly-volume summary. Multi-joint counts are approximate exposures, not equivalent isolation sets. Arms also receive indirect compound work.
+- `time`: a human-readable estimate; adding sets/exercises can exceed the 90-minute budget. Reassess it when changing the plan.
+
+`validatePlan()` checks required fields, ranges, and unique IDs. Limits: three sessions, up to 30 exercises/session and 30 sets/exercise. Limits prevent malformed data; they are not training recommendations.
+
+Old saved history remains readable after removing a movement or changing sets. Existing drafts retain entered sets; additional work rows are appended as needed. Finish or export a current session before editing the plan. Imports validate and merge completed sessions; drafts are kept locally rather than restored from a backup import.
+
+## Hypertrophy prescription
+
+The starting weekly volume is chest 10, back 10, quads 10, hamstrings 8, side delts 5, biceps 5, triceps 5, calves 4 and core 6 primary-muscle sets. Glutes receive squat/RDL/split-squat/leg-press exposure; front/rear delts and arms receive compound work too. These counts do not mean every muscle has an identical optimal dose. Start here, assess recovery and progression over 4–6 weeks, then add 1–2 weekly sets to a lagging muscle only if recovery and time allow.
+
+Use comfortable full range and controlled lowering. Keep approximately 2 RIR on compounds, 1–2 on isolation exercises. Progress reps first; once all prescribed sets hit the maximum at the target RIR twice at the same load, add the smallest suitable increment. Failure is not required. Review recovery every 4–6 weeks; use recovery mode for roughly half the work sets, 10–15% lighter and 4 RIR. Warm-ups and recovery sessions never earn progression credit.
+
+Pair only marked accessories, resting 60–75 seconds after each exercise. Allow longer rest on compounds. If the gym is crowded or time is short, keep core and save a partial session rather than rushing.
+
+### Day A · Squat + horizontal push · 75–90 min
+
+| Exercise | Work sets × reps | Rest | RIR |
 | --- | --- | --- | --- |
-| A | Hack squat | 3 × 6–10 | 150s |
-| A | Dumbbell bench press | 3 × 6–10 | 150s |
-| A | Chest-supported row | 3 × 8–12 | 120s |
-| A | Seated leg curl | 3 × 10–15 | 90s |
-| A | Cable lateral raise | 2 × 12–20 per side | 75s |
-| A | Rope triceps pressdown | 2 × 10–15 | 75s |
-| A | Pallof press | 2 × 10–15 per side | 60s |
-| B | Dumbbell Romanian deadlift | 3 × 6–10 | 150s |
-| B | Neutral-grip lat pulldown | 3 × 8–12 | 120s |
-| B | Incline dumbbell press | 3 × 8–12 | 120s |
-| B | Supported split squat | 3 × 8–12 per leg | 120s after both legs |
-| B | Reverse pec deck | 2 × 12–20 | 75s |
-| B | Cable curl | 2 × 10–15 | 75s |
-| B | Dead bug | 2 × 8–12 per side | 60s |
-| C | Leg press | 3 × 8–12 | 150s |
-| C | Machine chest press | 3 × 8–12 | 120s |
-| C | Seated cable row | 3 × 8–12 | 120s |
-| C | Machine hip thrust | 3 × 8–12 | 120s |
-| C | Machine shoulder press | 2 × 8–12 | 120s |
-| C | Standing calf raise | 2 × 10–15 | 75s |
-| C | Cable crunch | 2 × 10–15 | 60s |
+| Hack squat | 4 × 6–10 | 150s | 2 |
+| Dumbbell bench press | 3 × 6–10 | 150s | 2 |
+| Chest-supported row | 3 × 8–12 | 120s | 2 |
+| Seated leg curl | 3 × 10–15 | 90s | 1 |
+| Cable lateral raise | 3 × 12–20 | 75s | 1 |
+| Rope triceps pressdown | 3 × 10–15 | 75s | 1 |
+| Standing calf raise | 2 × 10–15 | 75s | 1 |
+| Pallof press | 2 × 10–15 | 60s | 2 |
 
-Only lateral raise/pressdown, reverse pec deck/curl and calf raise/crunch are suggested pairs. Rest 60–75s after each exercise when paired. In unilateral exercises, perform both sides before logging one set. Keep core if short on time; omit remaining accessories and save a partial session.
+### Day B · Hinge + vertical pull · 75–85 min
 
-## Sustainable overload
+| Exercise | Work sets × reps | Rest | RIR |
+| --- | --- | --- | --- |
+| Dumbbell Romanian deadlift | 3 × 6–10 | 150s | 2 |
+| Neutral-grip lat pulldown | 4 × 8–12 | 120s | 2 |
+| Incline dumbbell press | 3 × 8–12 | 120s | 2 |
+| Supported split squat | 3 × 8–12 | 120s | 2 |
+| Reverse pec deck | 2 × 12–20 | 75s | 1 |
+| Cable curl | 3 × 10–15 | 75s | 1 |
+| Dead bug | 2 × 8–12 | 60s | 2 |
 
-Keep the weight stable and build repetitions within the range. Once **all prescribed sets** hit the upper end with **at least 2 RIR in two logged exposures at the same load**, increase by the smallest suitable increment, generally 2–5%, and restart at the low end. The app defaults to +2.5 lb/1 kg for upper body and accessories, +5 lb/2.5 kg for main leg work; adjust to available equipment and proportionate increments. Recommendations are placeholders, never silently logged weights. Every actual set needs explicit input and confirmation.
+### Day C · Leg press + balanced upper body · 80–90 min
 
-Recovery mode uses roughly half the sets, 10–15% less weight and 4 RIR; these sessions do not count toward progression. Review recovery every 4–6 weeks or when fatigue rises. Two below-range sessions at the same weight suggest a 7.5% reset. A dead bug progresses through reps, pauses and lever length rather than added weight. Changing variations resets the suggestion track.
+| Exercise | Work sets × reps | Rest | RIR |
+| --- | --- | --- | --- |
+| Leg press | 3 × 8–12 | 150s | 2 |
+| Machine chest press | 4 × 8–12 | 120s | 2 |
+| Seated cable row | 3 × 8–12 | 120s | 2 |
+| Seated leg curl | 2 × 10–15 | 90s | 1 |
+| Machine shoulder press | 2 × 8–12 | 120s | 2 |
+| Cable lateral raise | 2 × 12–20 | 75s | 1 |
+| Standing calf raise | 2 × 10–15 | 75s | 1 |
+| Cable curl | 2 × 10–15 | 75s | 1 |
+| Rope triceps pressdown | 2 × 10–15 | 75s | 1 |
+| Cable crunch | 2 × 10–15 | 60s | 1 |
 
-Use one dumbbell's weight for presses/raises/curls, total loaded barbell weight for barbell exercises, and total external weight for split squats. Machine labels are equipment-specific. Keep technique, equipment and load conventions consistent. Pain-free alternatives are included. Stop for sharp pain, tingling or radiating symptoms; this is a general program, not rehabilitation.
+## Evidence and limits
 
-The design follows [ACSM 2026 guidance](https://acsm.org/resistance-training-guidelines-update-2026/) on consistency and regular major-muscle-group training, with small increases informed by [ACSM progression guidance](https://pubmed.ncbi.nlm.nih.gov/19204579/). The exact program and two-exposure rule are conservative implementation choices, not an official ACSM plan.
+[ACSM 2026 guidance](https://acsm.org/resistance-training-guidelines-update-2026/) recommends roughly 10 weekly sets/muscle for hypertrophy and regular major-muscle training. [A 2024 trained-participant study](https://pubmed.ncbi.nlm.nih.gov/38393985/) found similar quadriceps growth at 1–2 RIR versus failure over eight weeks; it is not proof that every muscle or trainee responds identically. This plan is a practical starting point, not a guarantee of maximum growth. Recovery, nutrition, technique and individual response matter.
 
-## Data & development
+## Warm-up logging and data
 
-- Drafts and session history use localStorage on this device and origin. No cloud sync. Export/import JSON backups from Journal. Imports validate and merge saved sessions; they do not restore or replace drafts.
-- Clearing browser data, uninstall behavior or changing origins can remove access to logs. Back up regularly.
-- The rest timer uses wall-clock time but does not guarantee a notification while Android suspends the app.
-- Offline use requires an initial online visit. The service worker uses network-first fetch with cached fallback. Increment its cache name after app releases; close/reopen all app windows to activate a waiting update.
-- Serve locally: `python3 -m http.server 8080` from this directory; open `http://localhost:8080`. Opening an HTML file directly will not support module/PWA behavior.
-- Checks: `npm run check && npm test`. No npm installation is required.
+Use Add warm-up set on any exercise, enter load/reps and check completion. Warm-ups appear separately in the journal and backup, excluded from work-set targets and overload suggestions. Up to 10 warm-up rows/exercise can be logged; the limit is not a prescription.
+
+For dumbbells, use one dumbbell's weight for presses, raises and curls; total held weight for split squats; total barbell load for barbell variations. Reps for unilateral movements are per side; log one set after both sides.
+
+No server or cloud sync. localStorage stores drafts/history at the current origin. Clearing browser data may erase logs: export backups first. Do not clear storage to update the app. Close all app/browser windows and reopen online if an update is waiting.
+
+## Development
+
+No runtime dependencies. Run `npm run check && npm test`. Serve with `python3 -m http.server 8080` from this directory. `program.js` loads JSON through fetch in browsers and filesystem reads in Node. Include `program.json` in deployment and offline cache. Increase the service-worker cache name when releasing updates.

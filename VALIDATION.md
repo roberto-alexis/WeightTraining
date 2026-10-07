@@ -1,12 +1,7 @@
 # Validation
 
-Completed locally:
-- JavaScript syntax checks for the app, program, and service worker.
-- Six passing Node tests covering day structure/core, two-exposure overload, insufficient effort/partial-session protection, variation/load isolation, recovery/reset rules, and unit conversion.
+JavaScript syntax checks and 13 Node tests pass. Coverage includes configuration edits/additions/order, invalid-plan rejection, planned weekly volume, RIR-specific progression, overload/partial-session protection, unit conversion, recovery exclusions, warm-up saving/validation, warm-up-only sessions, old backups and history compatibility after changing exercises.
 
-Not completed:
-- Browser interaction, visual layout and offline/PWA installation checks. Chromium download was blocked in this execution environment. `qa.cjs` outside this project records the intended mobile browser checks; it is not part of the deployed app.
-- GitHub access: initial permission failures were resolved; the initial README write succeeded through the connector. App upload follows in the next commit.
-- GitHub Pages deployment: requires repository access and Pages configured with GitHub Actions as source.
+Browser visual/interaction and Android install checks remain unverified in this environment because the Chromium download was blocked. On-device checks: add/check a warm-up, log work sets, save, view the journal, change lb/kg, export/import, and reopen offline after an online visit.
 
-Before relying on the app, validate on Android Chrome: enter a set; switch lb/kg; reload and verify the draft; save a partial session; export/import a backup; install; reopen online once, then confirm it opens offline. The first workout should use conservative loads while learning the progression workflow.
+Source and deployment use GitHub Actions. The initial app deployed successfully after Pages was enabled; subsequent commits run the same checks and deployment workflow. Warm-ups are stored separately and do not earn work-set progression credit.

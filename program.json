@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "name": "Three • Hypertrophy",
+  "goal": "Recoverable muscle growth in three weekly sessions",
+  "sessions": [
+    {
+      "id": "A",
+      "name": "Squat + horizontal push",
+      "time": "75–90 min",
+      "exercises": [
+        {
+          "id": "squat",
+          "name": "Hack squat",
+          "sets": 4,
+          "min": 6,
+          "max": 10,
+          "rest": 150,
+          "group": "MAIN LIFT",
+          "cue": "Brace before each rep. Use a comfortable depth; keep your whole foot planted.",
+          "alt": [
+            "Leg press",
+            "Goblet squat"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Quads",
+            "Glutes"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 5,
+            "kg": 2.5
+          }
+        },
+        {
+          "id": "bench",
+          "name": "Dumbbell bench press",
+          "sets": 3,
+          "min": 6,
+          "max": 10,
+          "rest": 150,
+          "group": "MAIN LIFT",
+          "cue": "Keep shoulder blades supported; lower with control. Log the weight of ONE dumbbell.",
+          "alt": [
+            "Machine chest press"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Chest"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "row",
+          "name": "Chest-supported row",
+          "sets": 3,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "PULL",
+          "cue": "Keep your chest on the pad; pull without shrugging.",
+          "alt": [
+            "Seated cable row"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Back"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "curlleg",
+          "name": "Seated leg curl",
+          "sets": 3,
+          "min": 10,
+          "max": 15,
+          "rest": 90,
+          "group": "ACCESSORY",
+          "cue": "Keep hips down; control the return.",
+          "alt": [
+            "Lying leg curl"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Hamstrings"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "lateral",
+          "name": "Cable lateral raise",
+          "sets": 3,
+          "min": 12,
+          "max": 20,
+          "rest": 75,
+          "group": "PAIR 1",
+          "cue": "Raise in a comfortable plane to shoulder height. Reps per side; weight per handle.",
+          "alt": [
+            "Dumbbell lateral raise"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Side delts"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "triceps",
+          "name": "Rope triceps pressdown",
+          "sets": 3,
+          "min": 10,
+          "max": 15,
+          "rest": 75,
+          "group": "PAIR 1",
+          "cue": "Keep elbows still; straighten without snapping the joint.",
+          "alt": [
+            "Cable bar pressdown"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Triceps"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "calfA",
+          "name": "Standing calf raise",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 75,
+          "group": "PAIR 2",
+          "cue": "Pause at the bottom and top; avoid bouncing.",
+          "alt": [
+            "Seated calf raise"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Calves"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "pallof",
+          "name": "Pallof press",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 60,
+          "group": "CORE / PAIR 2",
+          "cue": "Reps per side. Pause 2 seconds with arms extended; resist rotation.",
+          "alt": [
+            "Band Pallof press"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Core"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Hinge + vertical pull",
+      "time": "75–85 min",
+      "exercises": [
+        {
+          "id": "rdl",
+          "name": "Dumbbell Romanian deadlift",
+          "sets": 3,
+          "min": 6,
+          "max": 10,
+          "rest": 150,
+          "group": "MAIN LIFT",
+          "cue": "Push hips back with soft knees; stop before your back rounds. Weight of ONE dumbbell.",
+          "alt": [
+            "Barbell Romanian deadlift",
+            "Cable pull-through"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Hamstrings",
+            "Glutes"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 5,
+            "kg": 2.5
+          }
+        },
+        {
+          "id": "pulldown",
+          "name": "Neutral-grip lat pulldown",
+          "sets": 4,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "PULL",
+          "cue": "Pull elbows toward your sides; avoid leaning or jerking.",
+          "alt": [
+            "Machine pulldown"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Back"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "incline",
+          "name": "Incline dumbbell press",
+          "sets": 3,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "PUSH",
+          "cue": "Use a modest 15–30° incline and a comfortable grip. Weight of ONE dumbbell.",
+          "alt": [
+            "Incline machine press"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Chest"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "split",
+          "name": "Supported split squat",
+          "sets": 3,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "LEGS",
+          "cue": "Reps per leg. Hold support for balance; log total external weight held.",
+          "alt": [
+            "Single-leg leg press"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Quads",
+            "Glutes"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 5,
+            "kg": 2.5
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Reverse pec deck",
+          "sets": 2,
+          "min": 12,
+          "max": 20,
+          "rest": 75,
+          "group": "PAIR 2",
+          "cue": "Keep neck relaxed; open arms without shrugging.",
+          "alt": [
+            "Cable rear-delt fly"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Rear delts"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "biceps",
+          "name": "Cable curl",
+          "sets": 3,
+          "min": 10,
+          "max": 15,
+          "rest": 75,
+          "group": "PAIR 2",
+          "cue": "Keep upper arms still; use a grip your elbows tolerate.",
+          "alt": [
+            "Dumbbell hammer curl"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Biceps"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "deadbug",
+          "name": "Dead bug",
+          "sets": 2,
+          "min": 8,
+          "max": 12,
+          "rest": 60,
+          "group": "CORE",
+          "cue": "Reps per side. Exhale; extend opposite arm and leg without arching your back.",
+          "alt": [
+            "Bird dog"
+          ],
+          "kind": "body",
+          "muscles": [
+            "Core"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Leg press + balanced upper body",
+      "time": "80–90 min",
+      "exercises": [
+        {
+          "id": "legpress",
+          "name": "Leg press",
+          "sets": 3,
+          "min": 8,
+          "max": 12,
+          "rest": 150,
+          "group": "MAIN LIFT",
+          "cue": "Keep pelvis on the pad; stop before the lower back curls. Use the same machine.",
+          "alt": [
+            "Hack squat"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Quads",
+            "Glutes"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 5,
+            "kg": 2.5
+          }
+        },
+        {
+          "id": "chest",
+          "name": "Machine chest press",
+          "sets": 4,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "PUSH",
+          "cue": "Set handles near mid-chest; use a pain-free range.",
+          "alt": [
+            "Dumbbell bench press"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Chest"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "cableRow",
+          "name": "Seated cable row",
+          "sets": 3,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "PULL",
+          "cue": "Keep trunk still; pull elbows back without shrugging.",
+          "alt": [
+            "Chest-supported row"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Back"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "curllegC",
+          "name": "Seated leg curl",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 90,
+          "group": "ACCESSORY",
+          "cue": "Keep hips down; control the return.",
+          "alt": [
+            "Lying leg curl"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Hamstrings"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "shoulder",
+          "name": "Machine shoulder press",
+          "sets": 2,
+          "min": 8,
+          "max": 12,
+          "rest": 120,
+          "group": "SHOULDERS",
+          "cue": "Use a comfortable grip and range; do not crane your neck.",
+          "alt": [
+            "Landmine press"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Front delts"
+          ],
+          "targetRir": 2,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "lateralC",
+          "name": "Cable lateral raise",
+          "sets": 2,
+          "min": 12,
+          "max": 20,
+          "rest": 75,
+          "group": "PAIR 3",
+          "cue": "Raise in a comfortable plane to shoulder height. Reps per side; weight per handle.",
+          "alt": [
+            "Dumbbell lateral raise"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Side delts"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "calf",
+          "name": "Standing calf raise",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 75,
+          "group": "PAIR 3",
+          "cue": "Pause at the bottom and top; avoid bouncing.",
+          "alt": [
+            "Seated calf raise"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Calves"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "bicepsC",
+          "name": "Cable curl",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 75,
+          "group": "PAIR 4",
+          "cue": "Keep upper arms still; use a grip your elbows tolerate.",
+          "alt": [
+            "Dumbbell hammer curl"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Biceps"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "tricepsC",
+          "name": "Rope triceps pressdown",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 75,
+          "group": "PAIR 4",
+          "cue": "Keep elbows still; straighten without snapping the joint.",
+          "alt": [
+            "Cable bar pressdown"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Triceps"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        },
+        {
+          "id": "crunch",
+          "name": "Cable crunch",
+          "sets": 2,
+          "min": 10,
+          "max": 15,
+          "rest": 60,
+          "group": "CORE",
+          "cue": "Bring ribs toward pelvis; move through your trunk rather than just your hips.",
+          "alt": [
+            "Machine abdominal crunch"
+          ],
+          "kind": "load",
+          "muscles": [
+            "Core"
+          ],
+          "targetRir": 1,
+          "increment": {
+            "lb": 2.5,
+            "kg": 1
+          }
+        }
+      ]
+    }
+  ]
+}
