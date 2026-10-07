@@ -1,0 +1,8 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {program,recommendation,keyFor,kg,displayWeight} from '../program.js';
+const e=program[0].exercises[1];const session=(reps=10,rir=2,load=kg(40,'lb'),n=3,deload=false)=>({deload,exercises:[{key:keyFor(e),sets:Array.from({length:n},()=>({done:true,reps,rir,weight:load}))}]});
+test('all days include core and manageable volume',()=>{for(const p of program){assert.equal(p.exercises.length,7);assert.ok(p.exercises.at(-1).group.startsWith('CORE'));assert.equal(p.exercises.reduce((n,e)=>n+e.sets,0),18)}});
+test('two successful exposures earn an increment',()=>{assert.equal(displayWeight(recommendation(e,e.name,[session(),session()],'lb').weight,'lb'),42.5)});
+test('one exposure, failure proximity and partial sessions do not earn overload',()=>{for(const h of [[session()],[session(),session(10,1)],[session(),session(10,2,kg(40,'lb'),2)]])assert.equal(displayWeight(recommendation(e,e.name,h,'lb').weight,'lb'),40)});
+test('different loads and variations cannot earn progression',()=>{assert.equal(displayWeight(recommendation(e,e.name,[session(10,2,kg(35,'lb')),session()],'lb').weight,'lb'),40);assert.equal(recommendation(e,e.alt[0],[session(),session()],'lb').weight,null)});
+test('recovery sessions are excluded; repeated misses reset load',()=>{assert.equal(displayWeight(recommendation(e,e.name,[session(),session(2,1,kg(20,'lb'),2,true),session()],'lb').weight,'lb'),42.5);assert.equal(displayWeight(recommendation(e,e.name,[session(5),session(5)],'lb').weight,'lb'),37)});
+test('kg and lb conversion preserves actual load',()=>{assert.equal(displayWeight(kg(100,'lb'),'lb'),100);assert.equal(displayWeight(kg(100,'lb'),'kg'),45.36)});
