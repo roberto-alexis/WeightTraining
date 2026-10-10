@@ -105,7 +105,7 @@ Cards are collapsible native details controls: tap the exercise heading to open 
 - Badge totals are derived from the current draft and recalculated at save. Editing/unchecking a set can remove eligibility. Shown muscle names persist in the draft to prevent replay from toggling checkboxes or refreshing. Saved badges live in the session's optional `rewards` object and are included in existing backup exports/imports. Deleting a session deletes its badges; imported duplicate IDs are ignored. Old sessions remain record baselines, without retroactive coins.
 - Complete saved sessions get a day celebration; partial sessions retain earned coins but do not complete a day. The first time all configured days are completed in the same local Monday–Sunday week, a weekly celebration follows the daily one. Recovery sessions count toward completion. Week keys are captured in the device timezone when saved, so later travel does not regroup old rewards.
 - Muscle splashes dismiss after 8 seconds or immediately with the close/continue button. Recaps stay until dismissed, support Escape, and use native modal focus behavior. Reduced-motion preferences disable animations. No badge is needed for an encouraging day/week recap.
-- `images.json.celebrations` is a reusable artwork catalog independent of `program.json`. `reward-ui.js` uses `upper`, `lower`, and `champion` categories; add or replace the URLs to change the artwork. Assets are cached offline and optimized to 600×900 WebP. Coins are lightweight inline SVG body symbols with highlighted muscle regions.
+- `images.json.celebrations` is a reusable artwork catalog independent of `program.json`. `reward-ui.js` cycles through four portraits in each of the `upper`, `lower`, and `champion` categories (12 total). Add or replace entries in the catalog to change the artwork. The last selection in each category is kept locally, so reopening does not always show the same guy. Assets are cached offline and optimized to 600×900 WebP. Coins are lightweight inline SVG body symbols with highlighted muscle regions.
 
 ### Celebration artwork provenance
 
@@ -117,3 +117,8 @@ Subjects:
 - upper: Handsome adult Latino man age 30 with short wavy dark hair, smiling, front double-biceps flex showing chest, arms and abs, wearing only opaque short turquoise athletic running shorts.
 - lower: Handsome adult Black man age 32 with a close cropped beard, smiling over his shoulder in a three-quarter rear bodybuilding pose, showing strong back, glutes and thighs, wearing opaque short violet athletic running shorts.
 - champion: Handsome adult East Asian man age 30 with black hair, confident warm smile, standing relaxed with one arm flexed in a victory pose, athletic muscular chest and abs, wearing only opaque short coral athletic running shorts.
+
+
+### Browse all 12 celebration guys
+
+Open **Journal → Preview celebration → Next guy** to cycle through the entire collection without logging sets or adding coins. The preview stays open until dismissed. Achievement splashes still dismiss after eight seconds. The twelve optimized WebP portraits total about 513 KiB and are cached for offline use. The original three portraits are preserved. Nine additional saved asset paths and their exact built-in generation prompts are in [CELEBRATION-ART.md](CELEBRATION-ART.md).

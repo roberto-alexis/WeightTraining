@@ -163,17 +163,74 @@
     {
       "id": "upper",
       "url": "./assets/celebration-upper.webp",
-      "alt": "Smiling adult man flexing his arms in turquoise gym shorts"
+      "alt": "Smiling adult man flexing his arms in turquoise gym shorts",
+      "category": "upper"
     },
     {
       "id": "lower",
       "url": "./assets/celebration-lower.webp",
-      "alt": "Adult man flexing his back and legs in violet gym shorts"
+      "alt": "Adult man flexing his back and legs in violet gym shorts",
+      "category": "lower"
     },
     {
       "id": "champion",
       "url": "./assets/celebration-champion.webp",
-      "alt": "Smiling adult man celebrating in coral gym shorts"
+      "alt": "Smiling adult man celebrating in coral gym shorts",
+      "category": "champion"
+    },
+    {
+      "id": "sunshine",
+      "category": "upper",
+      "url": "./assets/celebration-sunshine.webp",
+      "alt": "Handsome adult man age 32 with fair freckled skin, short ginger hair and a neat ginger beard, muscular broad chest, flexing one bicep with his other hand on his hip, warm playful smile, opaque fitted short lemon-yellow running shorts."
+    },
+    {
+      "id": "midnight",
+      "category": "upper",
+      "url": "./assets/celebration-midnight.webp",
+      "alt": "Handsome adult South Asian man age 34 with medium brown skin, thick wavy black hair and short stubble, muscular shoulders chest and arms, front double-biceps pose, confident smile, opaque fitted short royal-blue gym shorts."
+    },
+    {
+      "id": "silver",
+      "category": "upper",
+      "url": "./assets/celebration-silver.webp",
+      "alt": "Handsome adult man age 48 with olive skin, swept-back salt-and-pepper hair and a neatly trimmed beard, powerful muscular build with natural chest hair, classic side-chest bodybuilding flex, warm smile, opaque fitted short raspberry gym shorts."
+    },
+    {
+      "id": "lagoon",
+      "category": "lower",
+      "url": "./assets/celebration-lagoon.webp",
+      "alt": "Handsome adult Polynesian man age 33 with warm brown skin, long dark hair tied back, powerful muscular physique and thick thighs, relaxed front-facing quad flex with hands on hips, broad friendly smile, opaque fitted short mint-green athletic shorts."
+    },
+    {
+      "id": "violet",
+      "category": "lower",
+      "url": "./assets/celebration-violet.webp",
+      "alt": "Handsome adult Latino man age 31 with medium tan skin, short dark curly hair and a neat mustache, strong athletic back and legs, three-quarter rear flex looking over shoulder smiling, opaque fitted short orange athletic shorts."
+    },
+    {
+      "id": "electric",
+      "category": "lower",
+      "url": "./assets/celebration-electric.webp",
+      "alt": "Handsome adult Black man age 35 with deep brown skin and short textured hair, clean shaven, muscular legs and athletic torso, front standing pose with one leg forward showing his quads and a relaxed flexed arm, joyful smile, opaque fitted short electric-pink gym shorts."
+    },
+    {
+      "id": "golden",
+      "category": "champion",
+      "url": "./assets/celebration-golden.webp",
+      "alt": "Handsome adult East Asian man age 36 with light tan skin, swept side-part dark hair and light stubble, broad muscular chest and athletic build, one arm raised in a flexing victory pose, warm confident grin, opaque fitted short golden-yellow gym shorts."
+    },
+    {
+      "id": "coral",
+      "category": "champion",
+      "url": "./assets/celebration-coral.webp",
+      "alt": "Handsome adult Mediterranean man age 30 with tan skin, shoulder-length wavy brown hair and short beard, lean muscular swimmer physique, arms raised in a joyful double-biceps victory pose, cheerful smile, opaque fitted short sky-blue athletic shorts."
+    },
+    {
+      "id": "emerald",
+      "category": "champion",
+      "url": "./assets/celebration-emerald.webp",
+      "alt": "Handsome adult man age 42 with medium brown skin, close-shaved head and neatly trimmed full black beard, solid muscular build with natural chest hair, relaxed confident pose flexing a single bicep and smiling at viewer, opaque fitted short emerald-green athletic shorts."
     }
   ]
 }
