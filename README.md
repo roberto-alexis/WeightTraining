@@ -96,3 +96,24 @@ No runtime dependencies. Run `npm run check && npm test`. Serve with `python3 -m
 The original adult cartoon gym portraits were generated with the built-in image-generation tool. Brief: a cohesive 3-column/4-row sheet of diverse handsome adult muscular men in opaque gym shorts, with poses emphasizing chest, back, quads, hamstrings, glutes, shoulders, biceps, triceps, calves, core, rear delts and full body. Pastel pink/lavender/aqua backgrounds, cel shading and no text. They are decorative muscle portraits, not anatomy or exercise-form diagrams. `assets/muscle-atlas.webp` is compressed for phones and shared by all cards.
 
 Cards are collapsible native details controls: tap the exercise heading to open or close; the first exercise opens initially. Open/closed state stays stable while logging within the current app session. The light theme uses pink/violet/aqua accents and a thin rainbow header.
+
+## Pride & Progress rewards
+
+- Finish all planned work sets for a primary muscle group to earn at most one coin for that group per session, if a checked set beats a historical personal record for the same exercise ID and variation.
+- Rep PR: more reps at the same load (0.05 kg tolerance). Bodyweight exercises use reps only. Estimated 1RM: Epley `load * (1 + reps / 30)` on 1–12 reps, improving by more than 1%. Estimates are not actual max tests.
+- The new set must meet target RIR and leave at least as much reserve as the historical record. Warm-ups and deload sessions do not earn coins. No previous comparison means a baseline, not a badge. Keep equipment and technique consistent.
+- Badge totals are derived from the current draft and recalculated at save. Editing/unchecking a set can remove eligibility. Shown muscle names persist in the draft to prevent replay from toggling checkboxes or refreshing. Saved badges live in the session's optional `rewards` object and are included in existing backup exports/imports. Deleting a session deletes its badges; imported duplicate IDs are ignored. Old sessions remain record baselines, without retroactive coins.
+- Complete saved sessions get a day celebration; partial sessions retain earned coins but do not complete a day. The first time all configured days are completed in the same local Monday–Sunday week, a weekly celebration follows the daily one. Recovery sessions count toward completion. Week keys are captured in the device timezone when saved, so later travel does not regroup old rewards.
+- Muscle splashes dismiss after 8 seconds or immediately with the close/continue button. Recaps stay until dismissed, support Escape, and use native modal focus behavior. Reduced-motion preferences disable animations. No badge is needed for an encouraging day/week recap.
+- `images.json.celebrations` is a reusable artwork catalog independent of `program.json`. `reward-ui.js` uses `upper`, `lower`, and `champion` categories; add or replace the URLs to change the artwork. Assets are cached offline and optimized to 600×900 WebP. Coins are lightweight inline SVG body symbols with highlighted muscle regions.
+
+### Celebration artwork provenance
+
+Generated with the built-in image-generation tool. Saved assets: `assets/celebration-upper.webp`, `assets/celebration-lower.webp`, and `assets/celebration-champion.webp`.
+
+Shared final prompt: “Use case: stylized-concept. Asset type: portrait celebration artwork for a gay Pride themed fitness phone app. [Subject below] Polished colorful cartoon editorial illustration, attractive masculine adult features and believable anatomy, tasteful fitness pin-up energy. Frame head through knees, entire head and flexing arm visible, subject centered. Pastel pink lilac aqua background with minimal rainbow arc, a few golden sparkles. Crisp painterly shading, joyful and uplifting. No text, no logos, no nudity, no sexual act, no transparent clothing. Single person, portrait aspect ratio.”
+
+Subjects:
+- upper: Handsome adult Latino man age 30 with short wavy dark hair, smiling, front double-biceps flex showing chest, arms and abs, wearing only opaque short turquoise athletic running shorts.
+- lower: Handsome adult Black man age 32 with a close cropped beard, smiling over his shoulder in a three-quarter rear bodybuilding pose, showing strong back, glutes and thighs, wearing opaque short violet athletic running shorts.
+- champion: Handsome adult East Asian man age 30 with black hair, confident warm smile, standing relaxed with one arm flexed in a victory pose, athletic muscular chest and abs, wearing only opaque short coral athletic running shorts.

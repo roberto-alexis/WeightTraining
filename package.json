@@ -1,1 +1,10 @@
-{"name":"three-weight-training","private":true,"version":"1.0.0","type":"module","scripts":{"test":"node --test tests/*.test.js","check":"node --check app.js && node --check program.js && node --check sw.js && node --check images.js"}}
+{
+  "name": "three-weight-training",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node --check app.js && node --check program.js && node --check sw.js && node --check images.js && node --check rewards.js && node --check reward-ui.js"
+  }
+}

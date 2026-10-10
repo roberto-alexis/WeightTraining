@@ -158,5 +158,22 @@
         33.333333
       ]
     }
-  }
+  },
+  "celebrations": [
+    {
+      "id": "upper",
+      "url": "./assets/celebration-upper.webp",
+      "alt": "Smiling adult man flexing his arms in turquoise gym shorts"
+    },
+    {
+      "id": "lower",
+      "url": "./assets/celebration-lower.webp",
+      "alt": "Adult man flexing his back and legs in violet gym shorts"
+    },
+    {
+      "id": "champion",
+      "url": "./assets/celebration-champion.webp",
+      "alt": "Smiling adult man celebrating in coral gym shorts"
+    }
+  ]
 }
