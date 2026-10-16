@@ -139,3 +139,5 @@ Open **Journal → Preview celebration → Next guy** to cycle through the entir
 ## Previous work-set comparison
 
 Each workout card shows the date of the last logged work session for the selected exercise variation. Each work-set row shows its corresponding previous load and reps, converted to the selected lb/kg unit (or BW). Additional rows show “Last: —”. Matching uses the exercise name, ignoring case and extra whitespace, across all days, programs and exercise IDs; different named variations remain separate. The most recent dated session with completed work sets is used, including partial/recovery sessions. Warm-ups and warm-up-only visits are excluded. This is a display comparison; existing overload and badge rules are unchanged.
+
+Checking a valid completed work or warm-up set automatically starts (or restarts) the exercise’s configured rest timer. Unchecking a set or rejecting incomplete values does not start it. The manual Rest, +30s and Stop controls remain available.
