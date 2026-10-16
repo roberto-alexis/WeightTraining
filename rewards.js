@@ -31,8 +31,8 @@ export function evaluateBadges(workout,draft,history){
  }
  return badges;
 }
-export function weekSummary(history,program,key){
- const sessions=history.filter(s=>s.rewards?.week===key),days=new Set(sessions.filter(s=>s.rewards.complete).map(s=>s.day));
+export function weekSummary(history,program,key,planId){
+ const sessions=history.filter(s=>s.rewards?.week===key&&(planId===undefined||(s.programId||'default')===planId)),days=new Set(sessions.filter(s=>s.rewards.complete).map(s=>s.day));
  return {complete:program.every(p=>days.has(p.id)),days:program.filter(p=>days.has(p.id)).length,badges:sessions.flatMap(s=>s.rewards.badges)};
 }
 export function validRewards(r){

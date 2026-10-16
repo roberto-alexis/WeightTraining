@@ -1,13 +1,63 @@
-// The JSON file owns exercise order, sets, rep ranges, rest, variations and load increments.
+// Program configuration is separate from journal storage. Imports never replace history.
+export const OVERRIDE_STORAGE='three-program-override-v1';
+export const MAX_PROGRAM_BYTES=1000000;
+const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+const text=(v,max,empty=false)=>typeof v==='string'&&v.length<=max&&(empty||v.trim().length>0);
+const safeId=(v,max)=>typeof v==='string'&&new RegExp(`^[-a-zA-Z0-9_]{1,${max}}$`).test(v)&&!Object.hasOwn(Object.prototype,v);
 export function validatePlan(plan){
- if(!plan||plan.version!==1||!Array.isArray(plan.sessions)||plan.sessions.length!==3)throw Error('program.json must contain exactly three sessions.');
+ if(!object(plan)||plan.version!==1)throw Error('Program version must be 1. Export the current program for a template.');
+ if(!Array.isArray(plan.sessions)||plan.sessions.length<1||plan.sessions.length>7)throw Error('A program must contain 1–7 workout days in sessions.');
+ if(plan.name!==undefined&&!text(plan.name,120,true))throw Error('Program name must be text, at most 120 characters.');
+ if(plan.goal!==undefined&&!text(plan.goal,1000,true))throw Error('Program goal must be text, at most 1,000 characters.');
  const days=new Set(),ids=new Set();
- for(const p of plan.sessions){if(!p||!/^[-a-zA-Z0-9_]{1,30}$/.test(p.id)||days.has(p.id)||typeof p.name!=='string'||typeof p.time!=='string'||!Array.isArray(p.exercises)||!p.exercises.length||p.exercises.length>30)throw Error('Invalid session configuration.');days.add(p.id);
- for(const e of p.exercises){if(!e||!/^[-a-zA-Z0-9_]{1,60}$/.test(e.id)||ids.has(e.id)||typeof e.name!=='string'||!e.name||!Number.isInteger(e.sets)||e.sets<1||e.sets>30||!Number.isInteger(e.min)||e.min<1||!Number.isInteger(e.max)||e.max<e.min||e.max>100||!Number.isInteger(e.rest)||e.rest<15||e.rest>600||!['load','body'].includes(e.kind)||typeof e.group!=='string'||typeof e.cue!=='string'||!Array.isArray(e.alt)||!e.alt.every(n=>typeof n==='string')||!Array.isArray(e.muscles)||!e.muscles.every(n=>typeof n==='string')||!Number.isInteger(e.targetRir)||e.targetRir<1||e.targetRir>4||!e.increment||!['lb','kg'].every(u=>Number.isFinite(e.increment[u])&&e.increment[u]>0))throw Error('Invalid exercise configuration.');ids.add(e.id)}}return plan;
+ for(const [i,p] of plan.sessions.entries()){
+  if(!object(p)||!safeId(p.id,30)||days.has(p.id)||!text(p.name,200)||!text(p.time,100)||!Array.isArray(p.exercises)||!p.exercises.length||p.exercises.length>30)throw Error(`Day ${i+1}: require a unique safe id, name, time, and 1–30 exercises.`);
+  days.add(p.id);
+  for(const [j,e] of p.exercises.entries()){
+   if(!object(e)||!safeId(e.id,60)||ids.has(e.id)||!text(e.name,200)||!Number.isInteger(e.sets)||e.sets<1||e.sets>30||!Number.isInteger(e.min)||e.min<1||!Number.isInteger(e.max)||e.max<e.min||e.max>100||!Number.isInteger(e.rest)||e.rest<15||e.rest>600||!['load','body'].includes(e.kind)||!text(e.group,100,true)||!text(e.cue,2000,true)||!Array.isArray(e.alt)||e.alt.length>20||!e.alt.every(n=>text(n,200))||!Array.isArray(e.muscles)||!e.muscles.length||e.muscles.length>20||!e.muscles.every(n=>text(n,100)&&!Object.hasOwn(Object.prototype,n))||!Number.isInteger(e.targetRir)||e.targetRir<1||e.targetRir>4||!object(e.increment)||!['lb','kg'].every(u=>Number.isFinite(e.increment[u])&&e.increment[u]>0&&e.increment[u]<=2000))throw Error(`Day ${i+1}, exercise ${j+1}: invalid or missing exercise fields, duplicate id, or values outside supported ranges.`);
+   ids.add(e.id);
+  }
+ }
+ return plan;
+}
+export function normalizePlan(value,override=true){
+ validatePlan(value);
+ // Only recognized data is retained; exported files are reusable program templates.
+ return {version:1,name:value.name?.trim()||`${value.sessions.length}-day ${override?'override':'program'}`,goal:value.goal||'',sessions:value.sessions.map(p=>({id:p.id,name:p.name,time:p.time,exercises:p.exercises.map(e=>({id:e.id,name:e.name,sets:e.sets,min:e.min,max:e.max,rest:e.rest,group:e.group,cue:e.cue,alt:[...e.alt],kind:e.kind,muscles:[...e.muscles],targetRir:e.targetRir,increment:{lb:e.increment.lb,kg:e.increment.kg}}))}))};
+}
+export function parseProgram(source){
+ if(new TextEncoder().encode(source).length>MAX_PROGRAM_BYTES)throw Error('Program files must be smaller than 1 MB.');
+ let value;try{value=JSON.parse(source.replace(/^\uFEFF/,''))}catch{throw Error('This file is not valid JSON. Export a program for a template.')}
+ return normalizePlan(value);
+}
+export function programId(value){
+ // Stable content identity separates drafts and weekly completion across plans.
+ const data=JSON.stringify(normalizePlan(value));let a=2166136261,b=5381;
+ for(let i=0;i<data.length;i++){a=Math.imul(a^data.charCodeAt(i),16777619);b=Math.imul(b,33)^data.charCodeAt(i)}
+ return `override-${(a>>>0).toString(16)}-${(b>>>0).toString(16)}`;
+}
+export function loadProgramOverride(storage){
+ try{const saved=storage.getItem(OVERRIDE_STORAGE);return saved?{plan:parseProgram(saved),error:''}:{plan:null,error:''}}
+ catch{return {plan:null,error:'Your saved program could not be loaded. The included program is active; your journal has not been reset.'}}
 }
 const raw=typeof window==='undefined'?JSON.parse(await (await import('node:fs/promises')).readFile(new URL('./program.json',import.meta.url),'utf8')):await fetch(new URL('./program.json',import.meta.url),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Unable to load program.json');return r.json()});
-export const plan=validatePlan(raw);
-export const program=plan.sessions;
+export const defaultPlan=normalizePlan(raw,false);
+let loaded={plan:null,error:''};
+if(typeof window!=='undefined'){try{loaded=loadProgramOverride(window.localStorage)}catch{loaded={plan:null,error:'Program storage unavailable. Using the included program.'}}}
+export let isOverride=!!loaded.plan;
+export let plan=loaded.plan||defaultPlan;
+export let program=plan.sessions;
+export const overrideLoadError=loaded.error;
+let currentPlanId=isOverride?programId(plan):'default';
+export const activePlanId=()=>currentPlanId;
+export const draftKey=day=>isOverride?`${activePlanId()}:${day}`:day;
+export function installOverride(value,storage=window.localStorage){
+ const next=normalizePlan(value);const serialized=JSON.stringify(next);
+ if(new TextEncoder().encode(serialized).length>MAX_PROGRAM_BYTES)throw Error('Program files must be smaller than 1 MB.');
+ storage.setItem(OVERRIDE_STORAGE,serialized); // Activate only after durable storage succeeds.
+ plan=next;program=plan.sessions;isOverride=true;currentPlanId=programId(plan);return plan;
+}
+export function resetOverride(storage=window.localStorage){storage.removeItem(OVERRIDE_STORAGE);plan=defaultPlan;program=plan.sessions;isOverride=false;currentPlanId='default'}
 export function weeklyVolume(){const counts={};for(const p of program)for(const e of p.exercises)for(const m of e.muscles)counts[m]=(counts[m]||0)+e.sets;return counts}
 export const kg=(value,unit)=>Number(value)*(unit==='lb'?0.45359237:1);
 export const displayWeight=(value,unit)=>Math.round(Number(value)/(unit==='lb'?0.45359237:1)*100)/100;

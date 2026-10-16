@@ -6,11 +6,24 @@ Installable, offline-capable training journal: three full-body sessions, 75–90
 
 Open https://roberto-alexis.github.io/WeightTraining/ in Chrome → Install app (or menu → Add to home screen → Install). Reopen online once to cache the app. Export journal backups regularly; logs are device-local.
 
-## Configure the plan
+## Import and export personal programs
+
+Open **The plan → Export program** for an editable JSON template. Use **Import program** to choose a JSON file, validate it and review a day-by-day summary before applying it. Program imports and Journal backup imports are separate operations.
+
+- Supports 1–7 workout days per week, in `sessions` array order. Navigation and weekly completion follow that count.
+- Optional top-level `name` (up to 120 characters). Missing or blank names become e.g. **4-day override**. Optional `goal` is descriptive text.
+- The imported plan is a device-local override in `three-program-override-v1`; the bundled `program.json` stays intact. Missing, unreadable or invalid overrides fall back to the included plan on startup. **Use included program** removes the override explicitly.
+- Program changes never clear the journal, coins, units or progression history. Unchanged exercise IDs and variation names retain their progression tracks. Use a new exercise ID for a fundamentally different movement.
+- Unfinished drafts are kept separately for each program configuration. Reimporting the same configuration restores its drafts; the included plan retains its legacy drafts. New sessions record their program and session names so old journal entries remain identifiable.
+- Weekly day completion is specific to the active program configuration. Legacy sessions belong to the included program. All historical coins remain in your collection.
+- Exported program files contain configuration only, not workout history. Export **Journal → Export backup** separately for logs. Clearing all browser data can erase both; fallback restores only the bundled plan, not deleted logs.
+- Imports are limited to 1 MB. Invalid files leave the current program and journal unchanged. Validation checks format and bounds, not the quality or suitability of the workout prescription.
+
+## Configure the bundled plan
 
 **Edit `program.json`**, then commit to `main`. GitHub Actions checks and deploys changes automatically. No app-code changes are needed to add exercises, change set counts, reorder exercises/sessions, or adjust rep ranges/rest.
 
-- `sessions`: three session objects, rendered in array order. Each has `id`, `name`, `time`, and `exercises`.
+- `sessions`: 1–7 session objects, rendered in array order. Each has `id`, `name`, `time`, and `exercises`.
 - Exercise `id`: unique across the entire plan. Keep IDs stable to retain progression history; change the ID when changing the movement fundamentally.
 - `name`, `cue`, `alt`: primary movement, technique note, and alternative names.
 - `sets`, `min`, `max`, `rest`: work-set count, rep range, rest in seconds. Warm-ups are independent.
@@ -21,7 +34,7 @@ Open https://roberto-alexis.github.io/WeightTraining/ in Chrome → Install app 
 - `muscles`: primary muscle tags for the live weekly-volume summary. Multi-joint counts are approximate exposures, not equivalent isolation sets. Arms also receive indirect compound work.
 - `time`: a human-readable estimate; adding sets/exercises can exceed the 90-minute budget. Reassess it when changing the plan.
 
-`validatePlan()` checks required fields, ranges, and unique IDs. Limits: three sessions, up to 30 exercises/session and 30 sets/exercise. Limits prevent malformed data; they are not training recommendations.
+`validatePlan()` checks required fields, ranges, and unique IDs. Limits: 1–7 sessions, up to 30 exercises/session and 30 sets/exercise. Limits prevent malformed data; they are not training recommendations.
 
 Old saved history remains readable after removing a movement or changing sets. Existing drafts retain entered sets; additional work rows are appended as needed. Finish or export a current session before editing the plan. Imports validate and merge completed sessions; drafts are kept locally rather than restored from a backup import.
 
