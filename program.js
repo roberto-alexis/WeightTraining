@@ -62,6 +62,25 @@ export function weeklyVolume(){const counts={};for(const p of program)for(const 
 export const kg=(value,unit)=>Number(value)*(unit==='lb'?0.45359237:1);
 export const displayWeight=(value,unit)=>Math.round(Number(value)/(unit==='lb'?0.45359237:1)*100)/100;
 export const keyFor=(e,name=e.name)=>`${e.id}:${name}`;
+// Display-only comparison: the same named movement can occur under different day IDs.
+export function lastPerformance(name,history){
+ const normalized=value=>String(value??'').trim().replace(/\s+/g,' ').toLowerCase();
+ const target=normalized(name);let latest=null,latestTime=-Infinity;
+ for(const session of history){
+  const time=Date.parse(session.date);if(!Number.isFinite(time)||time<latestTime)continue;
+  for(const exercise of session.exercises){
+   if(normalized(exercise.name)!==target)continue;
+   const sets=exercise.sets.filter(s=>s.done);
+   if(!sets.length)continue; // Warm-up-only visits do not replace the last work session.
+   latest={date:session.date,deload:session.deload,sets};latestTime=time;
+  }
+ }
+ return latest;
+}
+export function previousSetText(set,kind,unit){
+ if(!set)return 'Last: —';
+ return `Last: ${kind==='body'?'BW':`${displayWeight(set.weight,unit)} ${unit}`} × ${set.reps} reps`;
+}
 export function recommendation(e,name,history,unit){
  const entries=history.filter(s=>!s.deload).map(s=>s.exercises.find(x=>x.key===keyFor(e,name))).filter(x=>x&&x.sets.length).slice(-2);
  const last=entries.at(-1);if(!last)return {weight:null,text:e.kind==='body'?'Start at the lower end; leave 2 good reps in reserve.':'Choose a load for the low end with 2 good reps in reserve.'};

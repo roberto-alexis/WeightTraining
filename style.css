@@ -17,3 +17,6 @@ button{background:#fff;color:#592a6e;border-color:#dcbfdf}button:hover{backgroun
 .program-controls h2{margin-top:6px}.program-controls .actions{flex-wrap:wrap}.program-controls button{min-height:44px}
 #programMessage{padding:12px;border-radius:10px;background:#fff;border:1px solid #bc81ad}
 .days{flex-wrap:wrap;max-width:100%}.days button{overflow-wrap:anywhere;max-width:100%}.schedule{min-width:0;overflow-wrap:anywhere}.schedule b{white-space:normal}.session-heading h2,.history-card h3{overflow-wrap:anywhere}
+
+.previous-session{margin:8px 0 0;color:#72557a;font-size:12px;overflow-wrap:anywhere}
+.previous-set{grid-column:1/-1;color:#72557a;font-size:12px;padding:0 0 3px 2px}.set.done .previous-set{color:#493456}

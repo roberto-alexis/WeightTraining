@@ -44,3 +44,9 @@ test('single-day plan wraps safely; seven-day and hostile text render as data',a
  assert.equal((h.workoutHTML().match(/data-day=/g)||[]).length,7);assert.ok(!h.workoutHTML().includes('<script>'));assert.ok(h.programControlsHTML().includes('&lt;img'));assert.ok(!h.guideHTML().includes('<script>'));
  plans.resetOverride(h.storage);
 });
+test('work rows display the previous sets by name across IDs, with blanks for added sets',()=>{
+ const h=harness(),state=h.getState(),e=plans.program[0].exercises[0];
+ state.history.push({id:'past',date:'2026-10-12T12:00:00Z',day:'different-day',deload:false,note:'',exercises:[{key:'different-id:'+e.name,name:e.name,sets:[{weight:plans.kg(100,'lb'),reps:8,rir:2,done:true}],warmups:[{weight:10,reps:20,rir:4,done:true}]}]});
+ const html=h.workoutHTML().split('</article>')[0];
+ assert.ok(html.includes('Last: 100 lb × 8 reps'));assert.equal((html.match(/Last: —/g)||[]).length,e.sets-1);assert.ok(!html.includes('× 20 reps'));assert.ok(html.includes('Previous work set 1'));
+});

@@ -135,3 +135,7 @@ Subjects:
 ### Browse all 12 celebration guys
 
 Open **Journal → Preview celebration → Next guy** to cycle through the entire collection without logging sets or adding coins. The preview stays open until dismissed. Achievement splashes still dismiss after eight seconds. The twelve optimized WebP portraits total about 513 KiB and are cached for offline use. The original three portraits are preserved. Nine additional saved asset paths and their exact built-in generation prompts are in [CELEBRATION-ART.md](CELEBRATION-ART.md).
+
+## Previous work-set comparison
+
+Each workout card shows the date of the last logged work session for the selected exercise variation. Each work-set row shows its corresponding previous load and reps, converted to the selected lb/kg unit (or BW). Additional rows show “Last: —”. Matching uses the exercise name, ignoring case and extra whitespace, across all days, programs and exercise IDs; different named variations remain separate. The most recent dated session with completed work sets is used, including partial/recovery sessions. Warm-ups and warm-up-only visits are excluded. This is a display comparison; existing overload and badge rules are unchanged.
