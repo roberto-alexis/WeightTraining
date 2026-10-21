@@ -141,3 +141,7 @@ Open **Journal → Preview celebration → Next guy** to cycle through the entir
 Each workout card shows the date of the last logged work session for the selected exercise variation. Each work-set row shows its corresponding previous load and reps, converted to the selected lb/kg unit (or BW). Additional rows show “Last: —”. Matching uses the exercise name, ignoring case and extra whitespace, across all days, programs and exercise IDs; different named variations remain separate. The most recent dated session with completed work sets is used, including partial/recovery sessions. Warm-ups and warm-up-only visits are excluded. This is a display comparison; existing overload and badge rules are unchanged.
 
 Checking a valid completed work or warm-up set automatically starts (or restarts) the exercise’s configured rest timer. Unchecking a set or rejecting incomplete values does not start it. The manual Rest, +30s and Stop controls remain available.
+
+## Rest completion chime
+
+Rest timers play a short ascending three-note chime once at completion, alongside the visual alert and optional vibration. Audio is enabled by the tap that starts rest (including checking a completed set). It is generated locally and works offline. Turn up media volume; sound follows the phone's current speaker/headphone output. Keep the app open and the screen awake for reliable timing: mobile browsers may suspend timers/audio when backgrounded or locked. Stop cancels completion; +30s and a new set restart the countdown.

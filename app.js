@@ -7,7 +7,7 @@ const STORAGE='three-training-v1';let state={version:1,unit:'lb',day:'A',history
 try{const saved=localStorage.getItem(STORAGE);if(saved){const data=JSON.parse(saved);if(valid(data))state=data;else storageOK=false}}catch{storageOK=false}
 if(!program.some(p=>p.id===state.day))state.day=program[0].id;
 const expanded=new Map();
-let view='workout',end=0,installPrompt;let timerInterval;
+let view='workout',end=0,installPrompt;let timerInterval;let restAudio;let timerRunning=false;
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toast.timeout);toast.timeout=setTimeout(()=>$('#toast').hidden=true,4500)}
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));storageOK=true}catch{storageOK=false;toast('Storage unavailable. Export a backup before closing.')}}
 function workout(){return program.find(p=>p.id===state.day)}
@@ -43,7 +43,7 @@ function bindProgramControls(){
 }
 function showProgramMessage(message){programMessage=message;const el=$('#programMessage');if(el){el.textContent=message;el.hidden=false}}
 function programChanged(message){
- state.day=program[0].id;expanded.clear();clearInterval(timerInterval);$('#timer').hidden=true;
+ state.day=program[0].id;expanded.clear();stopTimer();
  save();programMessage=message;render();toast(message);
 }
 async function importProgram(event){
@@ -63,9 +63,35 @@ function bind(){bindProgramControls();if($('#previewReward'))$('#previewReward')
 function updateProgress(){const w=workout();let total=0,done=0;w.exercises.forEach(e=>{total+=count(e);done+=exerciseDraft(e).sets.slice(0,count(e)).filter(s=>s.done).length});$('#completion').textContent=`${done} / ${total} sets checked`;$('.progress span').style.width=`${done/total*100}%`}
 function completeSet(s,e){return (e.kind==='body'||(typeof s.weight==='number'&&Number.isFinite(s.weight)&&s.weight>=0&&s.weight<=2000))&&Number.isInteger(s.reps)&&s.reps>0&&s.reps<=100&&Number.isInteger(s.rir)&&s.rir>=0&&s.rir<=10}
 function finish(){const w=workout(),d=draft();const exercises=w.exercises.map(e=>{const x=exerciseDraft(e);return {key:keyFor(e,x.name),name:x.name,warmups:x.warmups.filter(s=>s.done&&completeSet(s,e)).map(s=>({...s,weight:e.kind==='body'?0:s.weight})),sets:x.sets.slice(0,count(e)).filter(s=>s.done&&completeSet(s,e)).map(s=>({...s,weight:e.kind==='body'?0:s.weight}))}}).filter(e=>e.sets.length||e.warmups.length);const completed=exercises.reduce((n,e)=>n+e.sets.length,0),total=w.exercises.reduce((n,e)=>n+count(e),0);if(!completed&&!exercises.some(e=>e.warmups.length)){toast('Check at least one completed work or warm-up set before saving.');return}if(completed<total&&!confirm(`Save a partial session with ${completed} of ${total} sets? Only checked sets will be saved.`))return;const date=new Date().toISOString(),week=weekKey(date),wasComplete=weekSummary(state.history,program,week,activePlanId()).complete,badges=evaluateBadges(w,d,state.history),complete=completed===total;state.history.push({id:crypto.randomUUID(),date,day:w.id,programId:activePlanId(),programName:plan.name,sessionName:w.name,deload:d.deload,note:d.note,exercises,rewards:{version:1,week,complete,badges}});const summary=weekSummary(state.history,program,week,activePlanId());if(complete)celebrate({kind:'day',day:w.id,badges});if(complete&&!wasComplete&&summary.complete)celebrate({kind:'week',badges:summary.badges});delete state.drafts[draftKey(state.day)];state.day=program[(program.findIndex(x=>x.id===w.id)+1)%program.length].id;save();view='history';render();window.scrollTo({top:0,behavior:'smooth'});toast('Session saved. Your next workout is ready.')}
-function startTimer(seconds){end=Date.now()+seconds*1000;$('#timer').hidden=false;clearInterval(timerInterval);tick();timerInterval=setInterval(tick,250)}
-function tick(){const seconds=Math.max(0,Math.ceil((end-Date.now())/1000));$('#clock').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;if(!seconds){clearInterval(timerInterval);toast('Rest complete. Ready for your next set.');navigator.vibrate?.([100,60,100])}}
-$('#addTime').onclick=()=>startTimer(Math.max(0,Math.ceil((end-Date.now())/1000))+30);$('#stopTimer').onclick=()=>{clearInterval(timerInterval);$('#timer').hidden=true};
+// Resume audio during the user's tap, before the timer callback needs it.
+function prepareRestAudio(){
+  try{
+    const Audio=window.AudioContext||window.webkitAudioContext;
+    if(!Audio)return;
+    if(!restAudio||restAudio.state==='closed')restAudio=new Audio();
+    if(restAudio.state!=='running')restAudio.resume().catch(()=>{});
+  }catch{/* Audio must never prevent logging a set or starting rest. */}
+}
+function playRestChime(){
+  if(!restAudio||restAudio.state!=='running')return;
+  try{
+    const now=restAudio.currentTime;
+    [659.25,830.61,987.77].forEach((frequency,index)=>{
+      const start=now+index*0.22,osc=restAudio.createOscillator(),gain=restAudio.createGain();
+      osc.type='sine';osc.frequency.setValueAtTime(frequency,start);
+      gain.gain.setValueAtTime(0,start);
+      gain.gain.linearRampToValueAtTime(0.3,start+0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001,start+0.45);
+      osc.connect(gain);gain.connect(restAudio.destination);
+      osc.onended=()=>{osc.disconnect();gain.disconnect()};
+      osc.start(start);osc.stop(start+0.46);
+    });
+  }catch{/* Keep the visual completion alert if audio is unavailable. */}
+}
+function startTimer(seconds){prepareRestAudio();end=Date.now()+seconds*1000;timerRunning=true;$('#timer').hidden=false;clearInterval(timerInterval);timerInterval=setInterval(tick,250);tick()}
+function stopTimer(){timerRunning=false;clearInterval(timerInterval);$('#timer').hidden=true}
+function tick(){const seconds=Math.max(0,Math.ceil((end-Date.now())/1000));$('#clock').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;if(!seconds&&timerRunning){timerRunning=false;clearInterval(timerInterval);playRestChime();toast('Rest complete. Ready for your next set.');navigator.vibrate?.([100,60,100])}}
+$('#addTime').onclick=()=>startTimer(Math.max(0,Math.ceil((end-Date.now())/1000))+30);$('#stopTimer').onclick=stopTimer;
 function exportBackup(){downloadJSON(state,`three-training-${new Date().toISOString().slice(0,10)}.json`)}
 function valid(data){if(!data||data.version!==1||!['lb','kg'].includes(data.unit)||typeof data.day!=='string'||data.day.length>30||!Array.isArray(data.history)||data.history.length>10000||!data.drafts||typeof data.drafts!=='object'||Array.isArray(data.drafts))return false;const checkSet=s=>s&&typeof s.done==='boolean'&&(s.weight===null||typeof s.weight==='number'&&Number.isFinite(s.weight)&&s.weight>=0&&s.weight<=2000)&&(s.reps===null||Number.isInteger(s.reps)&&s.reps>=1&&s.reps<=100)&&(s.rir===null||Number.isInteger(s.rir)&&s.rir>=0&&s.rir<=10);const ids=new Set();for(const s of data.history){if(!s||typeof s.id!=='string'||s.id.length>100||ids.has(s.id)||!Number.isFinite(Date.parse(s.date))||typeof s.day!=='string'||s.day.length>30||typeof s.deload!=='boolean'||typeof s.note!=='string'||s.note.length>500||!validRewards(s.rewards)||['programId','programName','sessionName'].some(k=>s[k]!==undefined&&(typeof s[k]!=='string'||s[k].length>200))||!Array.isArray(s.exercises)||s.exercises.length>30)return false;ids.add(s.id);for(const e of s.exercises){const known={kind:'load',sets:30};if(!e||typeof e.name!=='string'||e.name.length>200||typeof e.key!=='string'||e.key.length>300||!Array.isArray(e.sets)||e.sets.length>known.sets||!e.sets.every(x=>checkSet(x)&&x.done&&completeSet(x,known))||(e.warmups!==undefined&&(!Array.isArray(e.warmups)||e.warmups.length>10||!e.warmups.every(x=>checkSet(x)&&x.done&&completeSet(x,known)))))return false}}for(const [day,d] of Object.entries(data.drafts)){if(d?.shownRewards!==undefined&&(!Array.isArray(d.shownRewards)||d.shownRewards.length>30||!d.shownRewards.every(m=>typeof m==='string'&&m.length<=100)))return false;if(typeof day!=='string'||day.length>100||!d||typeof d.deload!=='boolean'||typeof d.note!=='string'||d.note.length>500||!d.exercises||typeof d.exercises!=='object')return false;for(const [id,e] of Object.entries(d.exercises)){if(!e||typeof e.name!=='string'||e.name.length>200||!Array.isArray(e.sets)||e.sets.length<1||e.sets.length>30||!e.sets.every(checkSet)||(e.warmups!==undefined&&(!Array.isArray(e.warmups)||e.warmups.length>10||!e.warmups.every(checkSet))))return false}}return true}
 async function importBackup(event){try{const file=event.target.files[0];if(!file)return;if(file.size>10e6)throw Error();const data=JSON.parse(await file.text());if(!valid(data))throw Error();const ids=new Set(state.history.map(s=>s.id)),fresh=data.history.filter(s=>!ids.has(s.id));if(!confirm(`Merge ${fresh.length} saved sessions? Your current drafts and units will be kept.`))return;state.history.push(...fresh);state.history.sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));save();render();toast(`${fresh.length} sessions imported.`)}catch{toast('This file is not a valid Three training backup. Nothing was changed.')}}
