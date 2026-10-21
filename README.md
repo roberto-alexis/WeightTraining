@@ -40,23 +40,23 @@ Old saved history remains readable after removing a movement or changing sets. E
 
 ## Hypertrophy prescription
 
-The starting weekly volume is chest 10, back 10, quads 10, hamstrings 8, side delts 5, biceps 5, triceps 5, calves 4 and core 6 primary-muscle sets. Glutes receive squat/RDL/split-squat/leg-press exposure; front/rear delts and arms receive compound work too. These counts do not mean every muscle has an identical optimal dose. Start here, assess recovery and progression over 4–6 weeks, then add 1–2 weekly sets to a lagging muscle only if recovery and time allow.
+The starting weekly volume is chest 10, back 10, quads 10, hamstrings 8, side delts 5, biceps 5, triceps 5, calves 6 and core 6 primary-muscle sets. Glutes receive RDL/split-squat/leg-press exposure; front/rear delts and arms receive compound work too. These counts do not mean every muscle has an identical optimal dose. Start here, assess recovery and progression over 4–6 weeks, then add 1–2 weekly sets to a lagging muscle only if recovery and time allow.
 
 Use comfortable full range and controlled lowering. Keep approximately 2 RIR on compounds, 1–2 on isolation exercises. Progress reps first; once all prescribed sets hit the maximum at the target RIR twice at the same load, add the smallest suitable increment. Failure is not required. Review recovery every 4–6 weeks; use recovery mode for roughly half the work sets, 10–15% lighter and 4 RIR. Warm-ups and recovery sessions never earn progression credit.
 
 Pair only marked accessories, resting 60–75 seconds after each exercise. Allow longer rest on compounds. If the gym is crowded or time is short, keep core and save a partial session rather than rushing.
 
-### Day A · Squat + horizontal push · 75–90 min
+### Day A · Leg press + horizontal push · 80–90 min
 
 | Exercise | Work sets × reps | Rest | RIR |
 | --- | --- | --- | --- |
-| Hack squat | 4 × 6–10 | 150s | 2 |
+| Leg press | 4 × 8–12 | 150s | 2 |
 | Dumbbell bench press | 3 × 6–10 | 150s | 2 |
 | Chest-supported row | 3 × 8–12 | 120s | 2 |
 | Seated leg curl | 3 × 10–15 | 90s | 1 |
 | Cable lateral raise | 3 × 12–20 | 75s | 1 |
 | Rope triceps pressdown | 3 × 10–15 | 75s | 1 |
-| Standing calf raise | 2 × 10–15 | 75s | 1 |
+| Standing calf raise | 3 × 10–15 | 75s | 1 |
 | Pallof press | 2 × 10–15 | 60s | 2 |
 
 ### Day B · Hinge + vertical pull · 75–85 min
@@ -71,17 +71,17 @@ Pair only marked accessories, resting 60–75 seconds after each exercise. Allow
 | Cable curl | 3 × 10–15 | 75s | 1 |
 | Dead bug | 2 × 8–12 | 60s | 2 |
 
-### Day C · Leg press + balanced upper body · 80–90 min
+### Day C · Leg extension + balanced upper body · 80–90 min
 
 | Exercise | Work sets × reps | Rest | RIR |
 | --- | --- | --- | --- |
-| Leg press | 3 × 8–12 | 150s | 2 |
+| Leg extension | 3 × 10–15 | 90s | 1 |
 | Machine chest press | 4 × 8–12 | 120s | 2 |
 | Seated cable row | 3 × 8–12 | 120s | 2 |
 | Seated leg curl | 2 × 10–15 | 90s | 1 |
 | Machine shoulder press | 2 × 8–12 | 120s | 2 |
 | Cable lateral raise | 2 × 12–20 | 75s | 1 |
-| Standing calf raise | 2 × 10–15 | 75s | 1 |
+| Standing calf raise | 3 × 10–15 | 75s | 1 |
 | Cable curl | 2 × 10–15 | 75s | 1 |
 | Rope triceps pressdown | 2 × 10–15 | 75s | 1 |
 | Cable crunch | 2 × 10–15 | 60s | 1 |

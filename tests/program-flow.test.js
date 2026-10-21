@@ -23,7 +23,7 @@ function harness(){
 test('program changes preserve journal and drafts; invalid and cancelled imports are inert',async()=>{
  const h=harness(),state=h.getState();state.history=[{id:'old',date:'2026-10-01',day:'A',deload:false,note:'kept',exercises:[]}];
  const draft=h.exerciseDraft(plans.program[0].exercises[0]);draft.sets[0].weight=40;const original=JSON.stringify(state.history);
- await h.upload(makePlan(4));assert.equal(plans.program.length,4);assert.equal(JSON.stringify(state.history),original);assert.equal(state.drafts.A.exercises.squat.sets[0].weight,40);
+ await h.upload(makePlan(4));assert.equal(plans.program.length,4);assert.equal(JSON.stringify(state.history),original);assert.equal(state.drafts.A.exercises[plans.defaultPlan.sessions[0].exercises[0].id].sets[0].weight,40);
  h.exerciseDraft(plans.program[0].exercises[0]).sets[0].weight=70;const key=plans.draftKey('D1');assert.ok(h.valid(state));
  await h.upload(makePlan(2));assert.equal(plans.program.length,2);assert.equal(state.drafts[key].exercises.squat0.sets[0].weight,70);
  await h.upload(makePlan(4));assert.equal(h.exerciseDraft(plans.program[0].exercises[0]).sets[0].weight,70);

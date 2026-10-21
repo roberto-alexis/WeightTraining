@@ -5,22 +5,19 @@
   "sessions": [
     {
       "id": "A",
-      "name": "Squat + horizontal push",
-      "time": "75–90 min",
+      "name": "Leg press + horizontal push",
+      "time": "80–90 min",
       "exercises": [
         {
-          "id": "squat",
-          "name": "Hack squat",
+          "id": "legpress",
+          "name": "Leg press",
           "sets": 4,
-          "min": 6,
-          "max": 10,
+          "min": 8,
+          "max": 12,
           "rest": 150,
           "group": "MAIN LIFT",
-          "cue": "Brace before each rep. Use a comfortable depth; keep your whole foot planted.",
-          "alt": [
-            "Leg press",
-            "Goblet squat"
-          ],
+          "cue": "Keep pelvis on the pad; stop before the lower back curls. Use a comfortable range and the same machine.",
+          "alt": [],
           "kind": "load",
           "muscles": [
             "Quads",
@@ -145,7 +142,7 @@
         {
           "id": "calfA",
           "name": "Standing calf raise",
-          "sets": 2,
+          "sets": 3,
           "min": 10,
           "max": 15,
           "rest": 75,
@@ -354,30 +351,27 @@
     },
     {
       "id": "C",
-      "name": "Leg press + balanced upper body",
+      "name": "Leg extension + balanced upper body",
       "time": "80–90 min",
       "exercises": [
         {
-          "id": "legpress",
-          "name": "Leg press",
+          "id": "legextension",
+          "name": "Leg extension",
           "sets": 3,
-          "min": 8,
-          "max": 12,
-          "rest": 150,
-          "group": "MAIN LIFT",
-          "cue": "Keep pelvis on the pad; stop before the lower back curls. Use the same machine.",
-          "alt": [
-            "Hack squat"
-          ],
+          "min": 10,
+          "max": 15,
+          "rest": 90,
+          "group": "ACCESSORY",
+          "cue": "Align knees with the machine pivot; keep hips on the seat. Extend and lower with control through a comfortable range.",
+          "alt": [],
           "kind": "load",
           "muscles": [
-            "Quads",
-            "Glutes"
+            "Quads"
           ],
-          "targetRir": 2,
+          "targetRir": 1,
           "increment": {
-            "lb": 5,
-            "kg": 2.5
+            "lb": 2.5,
+            "kg": 1
           }
         },
         {
@@ -493,7 +487,7 @@
         {
           "id": "calf",
           "name": "Standing calf raise",
-          "sets": 2,
+          "sets": 3,
           "min": 10,
           "max": 15,
           "rest": 75,
