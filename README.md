@@ -108,7 +108,7 @@ No runtime dependencies. Run `npm run check && npm test`. Serve with `python3 -m
 
 The original adult cartoon gym portraits were generated with the built-in image-generation tool. Brief: a cohesive 3-column/4-row sheet of diverse handsome adult muscular men in opaque gym shorts, with poses emphasizing chest, back, quads, hamstrings, glutes, shoulders, biceps, triceps, calves, core, rear delts and full body. Pastel pink/lavender/aqua backgrounds, cel shading and no text. They are decorative muscle portraits, not anatomy or exercise-form diagrams. `assets/muscle-atlas.webp` is compressed for phones and shared by all cards.
 
-Cards are collapsible native details controls: tap the exercise heading to open or close; the first exercise opens initially. Open/closed state stays stable while logging within the current app session. The light theme uses pink/violet/aqua accents and a thin rainbow header.
+Cards are collapsible native details controls: tap the exercise heading to open or close; the first unfinished exercise opens initially if it is the first card. When all prescribed work sets are checked, its card automatically collapses and switches to a compact mint-green completed style with a checkmarked “Completed” pill. Unfinished cards retain more prominent “To do” or “In progress” pills. Tap a completed card to reopen it, review sets or uncheck a set; it returns to the unfinished style and stays expanded. Recovery days use their reduced work-set target; warm-up sets never count toward completion. Open/closed state stays stable while logging within the current app session. The light theme uses pink/violet/aqua accents and a thin rainbow header.
 
 ## Pride & Progress rewards
 

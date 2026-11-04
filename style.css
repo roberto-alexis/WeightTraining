@@ -20,3 +20,21 @@ button{background:#fff;color:#592a6e;border-color:#dcbfdf}button:hover{backgroun
 
 .previous-session{margin:8px 0 0;color:#72557a;font-size:12px;overflow-wrap:anywhere}
 .previous-set{grid-column:1/-1;color:#72557a;font-size:12px;padding:0 0 3px 2px}.set.done .previous-set{color:#493456}
+
+/* Finished exercises are compact, unmistakably complete, and still editable when reopened. */
+.exercise-status{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;padding:5px 9px;border:1px solid transparent;border-radius:999px;font-size:11px;font-weight:800;line-height:1.25;white-space:nowrap}
+.exercise-status.is-pending{color:#75487e;background:#f8edf8;border-color:#ecd7eb}
+.exercise-status.is-progress{color:#80511e;background:#fff2dc;border-color:#f1d4a2}
+.exercise-status.is-complete{color:#215e50;background:#d5f2e7;border-color:#85cbbb}
+.exercise.completed{background:#edf9f5;border-color:#85cbbb;box-shadow:inset 5px 0 0 #38997d,0 3px 12px #34877113}
+.exercise.completed summary{padding:12px 16px}
+.exercise.completed .muscle-art{width:58px;height:58px;flex-basis:58px;opacity:.7;filter:saturate(.65)}
+.exercise.completed .exercise-title h3{color:#2b5f54}
+.exercise.completed .exercise-title .meta{color:#577870}
+.exercise.completed .number{color:#397f6c}
+.exercise.completed .muscle-label{margin-left:88px;color:#51766d}
+.exercise.completed .muscle-label span{color:#246854;font-weight:700}
+.exercise.completed details:not([open]) .previous-session{display:none}
+.exercise.completed details[open] .card-content{background:#fff}
+@media(max-width:640px){.exercise-status{font-size:10px;padding:5px 7px}.exercise.completed summary{padding:10px 12px}.exercise.completed .muscle-art{width:48px;height:48px;flex-basis:48px}.exercise.completed .muscle-label{margin-left:57px}}
+@media(max-width:380px){.exercise-head{gap:6px}.exercise-status{padding:4px 6px}}
